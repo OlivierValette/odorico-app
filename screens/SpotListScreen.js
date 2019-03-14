@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
 import Colors from '../constants/Colors';
 
-class OdoricoListScreen extends Component {
+class SpotListScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            title: "Odorico spot add",
-            headerRight: (<Button title="Add spot" onPress={() => navigation.navigate('OdoricoAddScreen')} />),
+            title: "Odorico spots list",
+            headerRight: (<Button title="Add spot" onPress={() => navigation.navigate('SpotAdd')} />),
             headerStyle: {
                 backgroundColor: Colors.alert,
             },
@@ -21,12 +21,15 @@ class OdoricoListScreen extends Component {
     };
 
     render() {
+
+        console.log(this.props.spots);
+
         return (
             <View>
-                <Text style={{ fontSize: 18, color: Colors.secondary, paddingBottom: 10,}}>Odorico list screen</Text>
+                <Text style={{ fontSize: 18, color: Colors.secondary, paddingBottom: 10,}}>Spots list screen</Text>
             </View>
         );
     }
 }
 
-export default OdoricoListScreen;
+export default SpotListScreen;

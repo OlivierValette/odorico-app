@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import Colors from '../constants/Colors';
 
-class OdoricoAddScreen extends Component {
+class SpotAddScreen extends Component {
 
     static navigationOptions = ({navigation}) => {
         return {
@@ -28,4 +28,4 @@ class OdoricoAddScreen extends Component {
     }
 }
 
-export default OdoricoAddScreen;
+export default SpotAddScreen;

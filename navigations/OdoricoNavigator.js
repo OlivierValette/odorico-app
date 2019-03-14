@@ -1,10 +1,10 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
-import OdoricoListScreen from '../screens/OdoricoListScreen';
-import OdoricoAddScreen from '../screens/OdoricoAddScreen';
+import spotListContainer from '../containers/spotListContainer';
+import SpotAddScreen from '../screens/SpotAddScreen';
 
 export default createStackNavigator({
-    OdoricoList: OdoricoListScreen,
-    OdoricoAdd: OdoricoAddScreen,
+    SpotList: spotListContainer,
+    SpotAdd: SpotAddScreen,
 });
