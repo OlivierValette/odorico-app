@@ -18,3 +18,13 @@ export const fetchSpots = () => {
             .then(spots => dispatch(receiveSpots(spots)))
     }
 };
+export const addSpot = (spot) => {
+    return dispatch => {
+        return fetch('http://10.26.162.12:3000/api/spots', {
+            method: 'POST',
+            data: spot,
+        })
+            .then(response => response.json())
+            .then(spots => dispatch(createSpot(spots)))
+    }
+};

@@ -1,10 +1,10 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 14740,
+  "packagerPid": 21460,
   "expoServerNgrokUrl": "https://cq-f43.anonymous.odoricoapp.exp.direct",
   "packagerNgrokUrl": "https://packager.cq-f43.anonymous.odoricoapp.exp.direct",
-  "ngrokPid": 9380,
+  "ngrokPid": 8036,
   "webpackServerPort": null,
   "devToolsPort": 19002
 }
