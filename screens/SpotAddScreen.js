@@ -1,19 +1,22 @@
 import React, {Component} from 'react';
 import { Button, View, Text, TextInput } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
+import * as mime from 'react-native-mime-types';
 import Colors from '../constants/Colors';
+
+const initialState = {
+    title: '',
+    description: '',
+    image: null,
+    lat: null,
+    lng: null,
+};
 
 class SpotAddScreen extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            title: '',
-            description: '',
-            image: null,
-            lat: null,
-            lng: null,
-        }
+        this.state = initialState;
     }
 
     static navigationOptions = ({navigation}) => {
@@ -33,22 +36,32 @@ class SpotAddScreen extends Component {
 
     async handleImage() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status === 'granted') {
-            let result = await ImagePicker.launchImageLibraryAsync();
+        if(status === 'granted') {
+            const result = await ImagePicker.launchImageLibraryAsync();
+            console.log(result);
             if (!result.cancelled) {
-                this.setState({image: result});
+                this.setState({ image: result });
             }
         }
     }
 
     handleSubmit() {
         const data = new FormData();
-        data.append('picture', {
-            uri: result.uri,
-            name: 'test.jpg',
-            type: 'image/jpg'
+        data.append('title', this.state.title);
+        data.append('address', this.state.address);
+        data.append('description', this.state.description);
+        data.append('image', {
+            uri: this.state.image.uri,
+            name: this.state.image.uri.replace(/^.*[\\\/]/, ''),
+            type: mime.lookup(this.state.image.uri),
         });
-        this.props.addSpot();
+        data.append('lat', this.state.lat);
+        data.append('lng', this.state.lng);
+
+        this.props.addSpot(data, () => {
+            this.setState( initialState);
+            this.props.navigation.navigate('SpotList');
+        });
     }
 
     render() {
@@ -58,32 +71,32 @@ class SpotAddScreen extends Component {
                 <TextInput
                     value={this.props.title}
                     placeholder='Titre'
-                    onChange={text => this.setState({title: text} )}
+                    onChangeText={text => this.setState({title: text} )}
                 />
                 <TextInput
                     value={this.props.address}
                     placeholder='Adresse'
-                    onChange={text => this.setState({address: text} )}
+                    onChangeText={text => this.setState({address: text} )}
                 />
                 <TextInput
                     value={this.props.description}
                     placeholder='Description'
-                    onChange={text => this.setState({description: text} )}
+                    onChangeText={text => this.setState({description: text} )}
                 />
                 <Button
                     title='Choisir une photo'
                     color={Colors.primary}
-                    onPress={() => this.handleImage()}
+                    onPress={ () => this.handleImage() }
                 />
                 <TextInput
                     value={this.props.lat}
                     placeholder='Latitude'
-                    onChange={text => this.setState({lat: text} )}
+                    onChangeText={text => this.setState({lat: text} )}
                 />
                 <TextInput
                     value={this.props.lng}
                     placeholder='Longitude'
-                    onChange={text => this.setState({lng: text} )}
+                    onChangeText={text => this.setState({lng: text} )}
                 />
                 <Button
                     title='Valider'

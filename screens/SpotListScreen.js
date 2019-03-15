@@ -32,7 +32,7 @@ class SpotListScreen extends Component {
                 <FlatList
                     data={this.props.spots}
                     keyExtractor={ (item, index) => item._id }
-                    renderItem={ ({item}) => <Text style={styles.item}>{item.title}</Text> }
+                    renderItem={ ({item}) => <Text style={styles.item} key={item._id}>{item.title}</Text> }
                 />
             </View>
         );

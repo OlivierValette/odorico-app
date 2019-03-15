@@ -3,10 +3,11 @@ import SpotAddScreen from '../screens/SpotAddScreen';
 import { addSpot} from "../redux/actions";
 
 const mapStateToProps = state => ({
+    spots: state.spots
 });
 
 const mapDispatchToProps = dispatch => ({
-    addSpot: (spot) => dispatch(addSpot(spot))
+    addSpot: (spot, cb) => dispatch(addSpot(spot, cb))
 });
 
 export default connect(
